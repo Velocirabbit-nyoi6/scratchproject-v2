@@ -53,6 +53,10 @@ const UserController = {
       const { username } = req.body;
       const user = await User.findOne({ username: username });
       
+   
+
+      
+
       if (!user) {
         const err = new Error('Error in UserController.savedList: User not found');
         return next(err);
@@ -60,17 +64,23 @@ const UserController = {
 
       //get savedList from user, should be an array of IDs
       const { savedList } = user;
-
-      const namedSavedList = await savedList.map(placeObj => {const name = db.query(`SELECT place_name FROM places`);
-      return {
-        name: name,
-        score: placeObj.score,
-        tags: placeObj.tags
+      console.log('savedList: ', user.savedList)
+      // const namedSavedList = await savedList.map(placeObj => {const name = db.query(`SELECT place_name FROM places WHERE place_id = ${}`);
+      // return {
+      //   name: name,
+      //   score: placeObj.score,
+      //   tags: placeObj.tags
+      // }
+      namedList = [];
+      for await (let place of savedList) {
+        const storedPlace = await db.query(`SELECT place_name FROM places where place_id = ${place}`)
+        console.log('storedPlace', storedPlace.rows[0].place_name)
+        const name = storedPlace.rows[0].place_name
+      
+        namedList.push(name)
       }
-      
-    });
-      
-      res.locals.savedList = namedSavedList;
+    
+      res.locals.savedList = namedList;
 
       return next();
     } catch (error) {
@@ -99,11 +109,9 @@ const UserController = {
         const storedPlace = await db.query(`SELECT place_name FROM places where place_id = ${place.locationID}`)
         const name = storedPlace.rows[0].place_name
         const { score, tags } = place;
-        console.log('place?', storedPlace.rows[0])
         namedList.push({name: name, score: score, tags: tags})
       }
 
-      console.log('namedlsit', namedList)
 
       // console.log('query', await db.query(`SELECT place_name FROM places where place_id = 1`))
       // const namedList = await beenList.map(async place => await db.query(`SELECT place_name FROM places where place_id = ${place.locationID}`));

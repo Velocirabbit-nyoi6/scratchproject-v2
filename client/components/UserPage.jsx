@@ -41,18 +41,18 @@ const UserPage = ({ username }) => {
     getTrys();
   }, []);
   //generate rows for saved list
-  // const savedRows = savedList.map((savedPlace) => {
-  //   return (
-  //     <SavedRow name={savedPlace}/>
-  //   );
-  // });
+  const savedRows = savedList.map((savedPlace) => {
+    return (
+      <SavedRow name={savedPlace}/>
+    );
+  });
   // //generate rows for tried list
+ 
   const triedRows = triedList.map((place) => {
     return (
       <TriedRow place={place}/>
     );
   });
-  console.log('triedRows!: ', triedRows)
  
   return (
     <div>
@@ -65,7 +65,7 @@ const UserPage = ({ username }) => {
             </tr>
           </thead>
           <tbody>
-            savedRows
+            {savedRows}
           </tbody>
         </table>
         <table className='BeenTable'>
