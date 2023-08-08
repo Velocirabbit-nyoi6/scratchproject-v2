@@ -13,6 +13,7 @@ const UserController = {
         username: username,
         password: hashedPassword,
       });
+      
       res.locals.user = newUser;
       return next();
     } catch (error) {
@@ -60,7 +61,7 @@ const UserController = {
       //get savedList from user, should be an array of IDs
       const { savedList } = user;
 
-      const namedSavedList = await savedList.map(placeObj => {const name = db.query(`SELECT name FROM Users where userID = ${placeObj.locationID}`);
+      const namedSavedList = await savedList.map(placeObj => {const name = db.query(`SELECT place_name FROM places`);
       return {
         name: name,
         score: placeObj.score,
@@ -80,19 +81,33 @@ const UserController = {
 
   beenList: async (req, res, next) => {
     try {
-      const { username } = req.body;
-      const user = await User.findOne({ username: username });
       
+      const { username } = req.body;
+      
+      const user = await User.findOne({ username: username });
+  
       if (!user) {
         const err = new Error('Error in UserController.savedList: User not found');
         return next(err);
       }
 
-      //get beenList from user, should be an array of IDs
+      //get beenList from user, is array of objects that ha
       const { beenList } = user;
+      const namedList = [];
 
-      const namedList = await savedList.map(placeID => db.query(`SELECT name FROM Users where userID = ${placeID}`));
-      
+      for await (let place of beenList) {
+        const storedPlace = await db.query(`SELECT place_name FROM places where place_id = ${place.locationID}`)
+        const name = storedPlace.rows[0].place_name
+        const { score, tags } = place;
+        console.log('place?', storedPlace.rows[0])
+        namedList.push({name: name, score: score, tags: tags})
+      }
+
+      console.log('namedlsit', namedList)
+
+      // console.log('query', await db.query(`SELECT place_name FROM places where place_id = 1`))
+      // const namedList = await beenList.map(async place => await db.query(`SELECT place_name FROM places where place_id = ${place.locationID}`));
+  
       res.locals.beenList = namedList;
 
       return next();
