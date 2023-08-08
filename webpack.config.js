@@ -16,6 +16,7 @@ module.exports = {
       '/api': 'http://localhost:3000',
     },
   },
+   szdgsrgofdbgjsodifgxjw
 
   entry: path.join(__dirname, 'index.js'),
   devtool: 'eval-source-map', // added to resolve the dev tool error in chrome console
