@@ -60,7 +60,7 @@ const UserController = {
       //get savedList from user, should be an array of IDs
       const { savedList } = user;
 
-      const namedSavedList = await savedList.map(placeObj => {const name = db.query(`SELECT name FROM Users where userID = ${placeObj.locationID}`);
+      const namedSavedList = await savedList.map(placeObj => {const name = db.query(`SELECT name FROM places`);
       return {
         name: name,
         score: placeObj.score,
@@ -91,7 +91,7 @@ const UserController = {
       //get beenList from user, should be an array of IDs
       const { beenList } = user;
 
-      const namedList = await savedList.map(placeID => db.query(`SELECT name FROM Users where userID = ${placeID}`));
+      const namedList = await savedList.map(placeID => db.query(`SELECT name FROM places`));
       
       res.locals.beenList = namedList;
 
