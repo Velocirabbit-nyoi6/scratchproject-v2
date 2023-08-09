@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; // import useNavigate
+import SavedRow from './SavedRow.jsx'
+import TriedRow from './TriedRow.jsx'
+
 
 const UserPage = ({ username }) => {
   const navigate = useNavigate(); // Use the useNavigate hook
@@ -26,40 +29,31 @@ const UserPage = ({ username }) => {
       //server should return an array of objects
       if (response.status === 200) {
         //check if it's in response.data!
-        setTriedList(response.data);
+        setTriedList(response.data.beenList);
       }
     } catch (err) {
       console.error(err);
     }
   };
-
+  // getTrys();
   useEffect(() => {
     getSaved();
     getTrys();
   }, []);
-
   //generate rows for saved list
   const savedRows = savedList.map((savedPlace) => {
     return (
-      <tr>
-        <td>{savedPlace}</td>
-      </tr>
+      <SavedRow name={savedPlace}/>
     );
   });
-  //generate rows for tried list
-  const triedRows = triedList.map((triedPlace) => {
-    const name = triedPlace.name;
-    const score = triedPlace.score;
-    const tags = triedPlace.tags;
+  // //generate rows for tried list
+ 
+  const triedRows = triedList.map((place) => {
     return (
-      <tr>
-        <td>{name}</td>
-        <td>{score}</td>
-        <td>{tags}</td>
-      </tr>
+      <TriedRow place={place}/>
     );
   });
-
+ 
   return (
     <div>
       {/* add a button to navigate to the search page */}
@@ -71,21 +65,7 @@ const UserPage = ({ username }) => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th>Capital One Cafe</th>
-            </tr>
-            <tr>
-              <th>Bean & Bean Chelsea</th>
-            </tr>
-            <tr>
-              <th>Gregorys Coffee</th>
-            </tr>
-            <tr>
-              <th>Variety Coffee Roasters</th>
-            </tr>
-            <tr>
-              <th>King's Street Coffee</th>
-            </tr>
+            {savedRows}
           </tbody>
         </table>
         <table className='BeenTable'>
@@ -97,31 +77,7 @@ const UserPage = ({ username }) => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th>Seven Grams Caffe</th>
-              <th>4</th>
-              <th>Chill</th>
-            </tr>
-            <tr>
-              <th>Intelligentsia Coffee Highline Coffeebar</th>
-              <th>4</th>
-              <th>Quiet</th>
-            </tr>
-            <tr>
-              <th>Stumptown Coffee Roasters</th>
-              <th>3</th>
-              <th>Chill</th>
-            </tr>
-            <tr>
-              <th>Gregorys Coffee</th>
-              <th>4</th>
-              <th>Outlets</th>
-            </tr>
-            <tr>
-              <th>Joe Coffee Company</th>
-              <th>2</th>
-              <th>Clean Bathroom</th>
-            </tr>
+            {triedRows}
           </tbody>
         </table>
       </div>
