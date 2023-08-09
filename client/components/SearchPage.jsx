@@ -90,28 +90,39 @@ const SearchPage = (props) => {
     ]
 
     return (
-        <div className='searchContainer'>
-            <h1>Guide</h1>
-            <div className='filterBar'>
-                <label>Category</label>
-                    <ReactSelect name='categories' options={categoriesOptions} value={categories.map(value => ({ value, label: value }))} onChange={handleChange} isMulti/>
-                <label>Neighborhood</label>
-                    <ReactSelect name='neighborhoods' options={neighborhoodOptions} value={neighborhoods.map(value => ({ value, label: value }))} onChange={handleChange} isMulti/>
-                <label>Tags</label>
-                    <ReactSelect name='tags' options={tagOptions} value={tags.map(value => ({ value, label: value }))} onChange={handleChange} isMulti/>
-                <button onClick={querySQL}>Find!</button>
+        <div className="container bg-dark">
+            <div className='searchContainer bg-dark'>
+                <h1>Guide</h1>
+                <div className='filterBar'>
+                    <label>Category</label>
+                        <ReactSelect placeholder='Category' name='categories' options={categoriesOptions} value={categories.map(value => ({ value, label: value }))} onChange={handleChange} isMulti/>
+                    <label>Neighborhood</label>
+                        <ReactSelect placeholder='Neighborhood' name='neighborhoods' options={neighborhoodOptions} value={neighborhoods.map(value => ({ value, label: value }))} onChange={handleChange} isMulti/>
+                    <label>Tags</label>
+                        <ReactSelect placeholder='Tags' name='tags' options={tagOptions} value={tags.map(value => ({ value, label: value }))} onChange={handleChange} isMulti/>
+                    
+                </div>
+                <br/>
+                <div className="d-flex justify-content-center">
+                    <button className="btn btn-light " onClick={querySQL}>Find!</button>
+                </div>
+                <table class="table table-dark table-hover">
+                <thead>
+                        <tr>
+                            <th>Place</th>
+                            <th>Address</th>
+                            <th>Rate/Save</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-striped">
+                        {results.map((result, index) => (
+                            <ResultRow key={index} result={result} username={props.username} />
+                        ))}
+                    </tbody>
+                    
+                </table>
             </div>
-            <table>
-                <tr>
-                    <th>Place</th>
-                    <th>Address</th>
-                </tr>
-                {results.map((result, index) => (
-                    <ResultRow key={index} result={result} username={props.username} />
-                ))}
-            </table>
         </div>
-
     )
 
 };

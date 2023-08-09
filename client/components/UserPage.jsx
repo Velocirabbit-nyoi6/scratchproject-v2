@@ -55,34 +55,36 @@ const UserPage = ({ username }) => {
   });
  
   return (
-    <div>
-      {/* add a button to navigate to the search page */}
-      <div className='lists'>
-        <table className='SavedTable'>
-          <thead>
-            <tr>
-              <h4>Saved Spots!</h4>
-            </tr>
-          </thead>
-          <tbody>
-            {savedRows}
-          </tbody>
-        </table>
-        <table className='BeenTable'>
-          <thead>
-            <tr>
-              <th><h4>Where You've Been</h4></th>
-              <th><h4>Rating</h4></th>
-              <th><h4>Tags</h4></th>
-            </tr>
-          </thead>
-          <tbody>
-            {triedRows}
-          </tbody>
-        </table>
-      </div>
-      <div className='searchButton'>
-        <button className='button' onClick={() => navigate('/search')}>Go to Search Page</button>
+    <div className="container">
+      <div className="bg-dark">
+        {/* add a button to navigate to the search page */}
+        <div className='lists'>
+          <table className="table table-striped table-dark table-hover">
+            <thead>
+              <tr>
+                <h4>Saved Spots!</h4>
+              </tr>
+            </thead>
+            <tbody className="table-group-divider">
+              {savedRows}
+            </tbody>
+          </table>
+          <table className="table table-striped table-dark table-hover">
+            <thead>
+              <tr>
+                <th><h4>Where You've Been</h4></th>
+                <th><h4>Rating</h4></th>
+                <th><h4>Tags</h4></th>
+              </tr>
+            </thead>
+            <tbody className="table-group-divider">
+              {triedRows}
+            </tbody>
+          </table>
+        </div>
+        <div className='searchButton'>
+          <button className='btn btn-light' onClick={() => navigate('/search')}>Go to Search Page</button>
+        </div>
       </div>
     </div>
   );
