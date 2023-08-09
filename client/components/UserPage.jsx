@@ -35,7 +35,7 @@ const UserPage = ({ username }) => {
       console.error(err);
     }
   };
-  // getTrys();
+  
   useEffect(() => {
     getSaved();
     getTrys();

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ReactSelect from 'react-select';
 import ResultRow from './ResultRow.jsx'
 
-const SearchPage = () => {
+const SearchPage = (props) => {
     const [categories, setCategories] = useState([]);
     const [neighborhoods, setNeighborhoods] = useState([]);
     const [tags, setTags] = useState([]);
@@ -107,7 +107,7 @@ const SearchPage = () => {
                     <th>Address</th>
                 </tr>
                 {results.map((result, index) => (
-                    <ResultRow key={index} result={result} />
+                    <ResultRow key={index} result={result} username={props.username} />
                 ))}
             </table>
         </div>

@@ -32,6 +32,10 @@ router.post('/placeSearch', placesController.getResults, (req, res) => {
   res.status(200).send(res.locals.searchResults)
 })
 
+//populate user's saveList
+router.post('/savePlace', userController.savePlace, (req, res) => {
+  res.status(200).send('dummy string')
+})
 //populate tags for searchList
 // router.get('/searchTags')
 
