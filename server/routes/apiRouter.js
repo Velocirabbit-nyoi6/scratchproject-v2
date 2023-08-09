@@ -31,6 +31,11 @@ router.post('/placeSearch', placesController.getResults, (req, res) => {
   res.status(200).send(res.locals.searchResults)
 })
 
+router.get('/placeinfo' , placesController.getGoogleInfo, placesController.getPlaceDetails, (req, res) =>{
+  console.log('successful google retrieval')
+  res.status(200).send(res.locals.googlePlaceDetails)
+})
+
 //populate tags for searchList
 // router.get('/searchTags')
 

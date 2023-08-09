@@ -2,6 +2,7 @@ const path = require('path');
 const htmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+
   devServer: {
     // hot: true,
     historyApiFallback: true,
