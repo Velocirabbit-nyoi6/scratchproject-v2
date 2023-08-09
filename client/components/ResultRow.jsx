@@ -29,6 +29,7 @@ const ResultRow = (props) => {
     //add place id to user document saved array
     const [show, setShow] = useState({show : false})
     const detailsClickHandle = () =>{
+
         showModal()
     }
 
@@ -44,12 +45,18 @@ const ResultRow = (props) => {
         <tr>
             <td>{place_name}</td>
             <td>{address}</td>
+            <td>
             <button>Rate</button>
             <button onClick={savePlaceFunc}>Save</button>
             <Modal show = {show.show} handleClose = {hideModal} rowObj = {props.result}></Modal>
-            <button onClick = {detailsClickHandle}>Details</button>
+            <button id = "setModal" onClick = {detailsClickHandle}>Details</button>
+            </td>
+            {show && (
+                <Modal show={show.show} handleClose={hideModal} rowObj={props.result} />
+            )}
         </tr>
     );
 }
+//             <Modal show = {show.show} handleClose = {hideModal} rowObj = {props.result}></Modal>
 
 export default ResultRow;
