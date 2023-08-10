@@ -9,9 +9,9 @@ const NavBar = () => {
                 <div className="container">
                 <a href="index.html" className="navbar-brand display-2">VYBE</a>
                 <ul className="navbar-nav">
-                    <li className="nav-item">
-                    <a href="index.html" class="nav-link">Home</a>
-                    </li>
+                    {/* <li className="nav-item">
+                    <a onClick={() => navigate('/login-signup')} className="nav-link btn">Home</a>
+                    </li> */}
                     <li className="nav-item">
                     <a onClick={() => navigate('/user')} className="nav-link btn">My Page</a>
                     </li>

@@ -94,15 +94,16 @@ const SearchPage = (props) => {
         <div className="container">
             <NavBar />
             <div className='searchContainer bg-dark'>
-                <h1>Guide</h1>
-                <div className='filterBar'>
-                    <label>Category</label>
-                        <ReactSelect placeholder='Category' name='categories' options={categoriesOptions} value={categories.map(value => ({ value, label: value }))} onChange={handleChange} isMulti/>
-                    <label>Neighborhood</label>
-                        <ReactSelect placeholder='Neighborhood' name='neighborhoods' options={neighborhoodOptions} value={neighborhoods.map(value => ({ value, label: value }))} onChange={handleChange} isMulti/>
-                    <label>Tags</label>
-                        <ReactSelect placeholder='Tags' name='tags' options={tagOptions} value={tags.map(value => ({ value, label: value }))} onChange={handleChange} isMulti/>
-                    
+                <div className='d-flex justify-content-center'>
+                    <div className='filterBar d-flex'>
+                        <label>Category</label>
+                            <ReactSelect placeholder='Category' name='categories' options={categoriesOptions} value={categories.map(value => ({ value, label: value }))} onChange={handleChange} isMulti/>
+                        <label>Neighborhood</label>
+                            <ReactSelect placeholder='Neighborhood' name='neighborhoods' options={neighborhoodOptions} value={neighborhoods.map(value => ({ value, label: value }))} onChange={handleChange} isMulti/>
+                        <label>Tags</label>
+                            <ReactSelect placeholder='Tags' name='tags' options={tagOptions} value={tags.map(value => ({ value, label: value }))} onChange={handleChange} isMulti/>
+                        
+                    </div>
                 </div>
                 <br/>
                 <div className="d-flex justify-content-center">
