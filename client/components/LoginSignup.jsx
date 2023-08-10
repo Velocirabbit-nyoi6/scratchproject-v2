@@ -58,18 +58,22 @@ const LoginSignup = ({ onLogin, setUser }) => {
       </div>
 
       <div>
-        <form className='signup-container bg-dark'>
-          <div className='signup-card'>
-            <div>
-              <input
-                type='text'
-                className='form-control'
-                value={username}
-                placeholder='Username'
-                onChange={(e) => setUsername(e.target.value)}
-              />
+        <form className='signup-container bg-dark align-items-center'>
+          <div className='signup-card col-auto'>
+            <div class="form-floating mb-3">
+              
+                <input
+                  type='text'
+                  className='form-control'
+                  value={username}
+                  placeholder='Username'
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+                <label for="floatingInput">Username</label>
+              
+              <div id="emailHelp" class="form-text text-light">We'll never share your information with anyone else.</div>
             </div>
-            <div>
+            <div class="form-floating mb-3">
               <input
                 type='password'
                 className='form-control'
@@ -77,6 +81,7 @@ const LoginSignup = ({ onLogin, setUser }) => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
+              <label for="floatingInput">Password</label>
             </div>
             <div className="btn-group">
               <button className='btn btn-secondary text-light py-2' onClick={login}>
@@ -86,6 +91,10 @@ const LoginSignup = ({ onLogin, setUser }) => {
               <button className='btn btn-secondary text-dark py-2' onClick={signup}>
                 Sign Up
               </button>
+            </div>
+            <div class="mb-3 form-check">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1" />
+              <label class="form-check-label text-light" for="exampleCheck1">I like checkboxes</label>
             </div>
             {error && <p className='errmessage'>{error}</p>}
           </div>
