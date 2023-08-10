@@ -1,5 +1,5 @@
 
-import '/Users/jamesboswell/scratchproject-v2/css/modal.css';
+import '../../css/modal.css';
 import React from 'react';
 import PlaceDetails from './PlaceDetails.jsx';
 
