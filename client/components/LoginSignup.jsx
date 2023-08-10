@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; // replaced useHistory with useNavigate as useHistory is deprecated
+import { signInWithGoogle } from "../../firebase.js";
 
 const LoginSignup = ({ onLogin, setUser }) => {
   const [username, setUsername] = useState('');
