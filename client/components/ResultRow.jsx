@@ -1,8 +1,12 @@
 import React from 'react';
 import Modal from './Modal.js'
 import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
+
 const ResultRow = (props) => {
-    const { place_name, category, address, neighborhood } = props.result
+    const [savedPlace, setSavedPlace] = useState('');
 
     const [show, setShow] = useState({show : false})
     const detailsClickHandle = () =>{
@@ -18,13 +22,15 @@ const ResultRow = (props) => {
         setShow({show : false})
     }
 
+    const { place_name, category, address, neighborhood } = props.result
+
     return (
         <tr>
             <td>{place_name}</td>
             <td>{address}</td>
             <td>
             <button>Rate</button>
-            <button>Save</button>
+            <button onClick={savePlaceFunc}>Save</button>
             <button id = "setModal" onClick = {detailsClickHandle}>Details</button>
             </td>
             {show && (

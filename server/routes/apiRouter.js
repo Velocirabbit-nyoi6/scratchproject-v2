@@ -19,6 +19,7 @@ router.post('/login', userController.login, (req, res, next) => {
 
 // populate beenList handler, add middleware for querying mongo for beenList and SQL for location names
 router.post('/beenList', userController.beenList, (req, res) => {
+
   res.status(200).json({beenList: res.locals.beenList})
 });
 
@@ -36,6 +37,10 @@ router.get('/placeinfo' , placesController.getGoogleInfo, placesController.getPl
   res.status(200).send(res.locals.googlePlaceDetails)
 })
 
+//populate user's saveList
+router.post('/savePlace', userController.savePlace, (req, res) => {
+  res.status(200).send('dummy string')
+})
 //populate tags for searchList
 // router.get('/searchTags')
 
