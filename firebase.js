@@ -1,33 +1,86 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithRedirect } from "firebase/auth";
+// // Import the functions you need from the SDKs you need
+// import { initializeApp } from "firebase/app";
+// import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithRedirect } from "firebase/auth";
 
 
-// Your web app's Firebase configuration
+// // Your web app's Firebase configuration
+// const firebaseConfig = {
+//   apiKey: "AIzaSyAlkwRZYWt2LR64DJo7Lmjapt1N3h58iGk",
+//   authDomain: "vybe2023.firebaseapp.com",
+//   projectId: "vybe2023",
+//   storageBucket: "vybe2023.appspot.com",
+//   messagingSenderId: "515655264926",
+//   appId: "1:515655264926:web:89ff30b12438529f97298f"
+// };
+
+// // Initialize Firebase
+// const app = initializeApp(firebaseConfig); 
+// export const auth = getAuth(app); // use to check info about the user that is authenticated
+
+// // logic for gmail authentication
+// const provider = new GoogleAuthProvider();
+
+// // function that represent sign in from google
+// export const signInWithGoogle = async () => {
+//     console.log("In signInWithGoogle XXXXXXXXXX");
+//     await signInWithPopup(auth, provider)
+//     .then((data) =>
+//        console("DATA in signInWithGoogle", data)
+//     )
+//     .catch((err) => {
+//         console.log("ERROR IN signInWithGoogle", err);
+//     }); // make the pop up that ask you to sign in
+// }
+
+import { initializeApp } from 'firebase/app';
+import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";  // from docs
+
+// Follow this pattern to import other Firebase services
+
+// TODO: Replace the following with your app's Firebase project configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAlkwRZYWt2LR64DJo7Lmjapt1N3h58iGk",
-  authDomain: "vybe2023.firebaseapp.com",
-  projectId: "vybe2023",
-  storageBucket: "vybe2023.appspot.com",
-  messagingSenderId: "515655264926",
-  appId: "1:515655264926:web:89ff30b12438529f97298f"
+      apiKey: "AIzaSyAlkwRZYWt2LR64DJo7Lmjapt1N3h58iGk",
+      authDomain: "vybe2023.firebaseapp.com",
+      projectId: "vybe2023",
+      storageBucket: "vybe2023.appspot.com",
+      messagingSenderId: "515655264926",
+      appId: "1:515655264926:web:89ff30b12438529f97298f"
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig); 
-export const auth = getAuth(app); // use to check info about the user that is authenticated
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-// logic for gmail authentication
-const provider = new GoogleAuthProvider();
+const provider = new GoogleAuthProvider(); // from docs
 
-// function that represent sign in from google
+provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+
+// To apply the default browser preference instead of explicitly setting it.
+const auth = getAuth();
+auth.languageCode = 'it';
+
 export const signInWithGoogle = async () => {
-    console.log("In signInWithGoogle XXXXXXXXXX");
-    await signInWithPopup(auth, provider)
-    .then((data) =>
-       console("DATA in signInWithGoogle", data)
-    )
-    .catch((err) => {
-        console.log("ERROR IN signInWithGoogle", err);
-    }); // make the pop up that ask you to sign in
+
+return signInWithPopup(auth, provider)
+  .then((result) => {
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    const token = credential.accessToken;
+    // The signed-in user info.
+    const user = result.user;
+    // IdP data available using getAdditionalUserInfo(result)
+    // ...
+    console.log('Google signInWithPopup ->', user);
+  }).catch((error) => {
+    // Handle Errors here.
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // The email of the user's account used.
+    const email = error.customData.email;
+    // The AuthCredential type that was used.
+    const credential = GoogleAuthProvider.credentialFromError(error);
+    // ...
+  })
 }
+
+

@@ -55,7 +55,7 @@ const LoginSignup = ({ onLogin, setUser }) => {
     e.preventDefault(); // this will prevent the div from submitting
     // const { email } =
     await signInWithGoogle();
-    console.log('after signInWithGoogle');
+    // console.log('after signInWithGoogle');
     // await fetch('/api/oauthSignup', {
     //   method: 'POST',
     //   headers: {
@@ -65,8 +65,8 @@ const LoginSignup = ({ onLogin, setUser }) => {
     // });
     
     // setUser(email);
-    onLogin();
-    navigate('/api/user');
+    // onLogin();
+    // navigate('/api/user');
   };
 
 
