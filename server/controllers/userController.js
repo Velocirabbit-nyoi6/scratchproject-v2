@@ -131,7 +131,32 @@ const UserController = {
       const err = new Error('Error in UserController.savePlace: ' + error.message);
       return next(err);
     }
-  }
+  },
+
+  deleteSavedPlaced:  async (req, res, next) => {
+    try {
+      const { username, deleteSaved } = req.body;
+
+      const storedPlaceID = await db.query(`SELECT place_id FROM places where place_name = '${deleteSaved}'`)
+      const user = await User.findOne({ username: username });
+      if (!user) {
+        const err = new Error('Error in UserController.deleteSavedPlace: User not found');
+        return next(err);
+      }
+      console.log('storedPlaceID: ', storedPlaceID.rows[0].place_id)
+      console.log('user ', user)
+      const update = await User.findOneAndUpdate({
+        username: `${username}`},
+        {$pull: {"savedList": `${storedPlaceID.rows[0].place_id}`}}
+        );
+        res.locals.savedPlace = update
+      return next();
+
+    } catch (error) {
+      const err = new Error('Error in UserController.savePlace: ' + error.message);
+      return next(err);
+    }
+  },
 };
 
 

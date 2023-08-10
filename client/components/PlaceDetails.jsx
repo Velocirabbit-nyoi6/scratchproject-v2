@@ -10,7 +10,6 @@ const PlaceDetails = (props) => {
         const tagContainer = document.getElementById('tagContainer');
       
         tagsArray.forEach(tag => {
-            if (tag.includes(_)) tag = ''
           const tagElement = document.createElement('span');
           tagElement.classList.add('tag');
           tagElement.textContent = tag;

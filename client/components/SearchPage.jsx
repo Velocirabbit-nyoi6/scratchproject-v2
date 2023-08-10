@@ -93,7 +93,7 @@ const SearchPage = (props) => {
     return (
         <div className="container">
             <NavBar />
-            <div className='searchContainer bg-dark'>
+            <div className='searchContainer bg-dark bg-gradient'>
                 <div className='d-flex justify-content-center'>
                     <div className='filterBar d-flex'>
                         <label>Category</label>
@@ -110,11 +110,11 @@ const SearchPage = (props) => {
                     <button className="btn btn-light " onClick={querySQL}>Find!</button>
                 </div>
                 <table class="table table-dark table-hover">
-                <thead>
+                    <thead>
                         <tr>
                             <th>Place</th>
                             <th>Address</th>
-                            <th>Rate/Save</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody class="table-striped">
