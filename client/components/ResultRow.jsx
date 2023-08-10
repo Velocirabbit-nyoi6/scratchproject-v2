@@ -1,3 +1,6 @@
+import React from 'react';
+import Modal from './Modal.js'
+import { useState } from 'react';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -48,7 +51,6 @@ const ResultRow = (props) => {
             <td>
             <button>Rate</button>
             <button onClick={savePlaceFunc}>Save</button>
-            <Modal show = {show.show} handleClose = {hideModal} rowObj = {props.result}></Modal>
             <button id = "setModal" onClick = {detailsClickHandle}>Details</button>
             </td>
             {show && (
