@@ -15,14 +15,13 @@ tr {
 }
 
 
-/* .filterBar {
+.filterBar {
   display: flex;
   flex-direction: column;
   align-items: stretch;
   width: 50%;
   padding: 2em;
-  justify-content: center;
-} */
+} 
 
 
 .signup-container {
