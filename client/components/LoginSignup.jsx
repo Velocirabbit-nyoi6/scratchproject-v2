@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; // replaced useHistory with useNavigate as useHistory is deprecated
-<<<<<<< HEAD
-import { signInWithGoogle } from "../../firebase.js";
-=======
 import NavBar from './NavBar.jsx';
->>>>>>> dev
+// import login function from google
+import { signInWithGoogle } from "./firebase.js";
 
 const LoginSignup = ({ onLogin, setUser }) => {
   const [username, setUsername] = useState('');
@@ -51,6 +49,26 @@ const LoginSignup = ({ onLogin, setUser }) => {
     }
   };
 
+  // sign in google 
+  const handleGoogleSignIn = async (e) => {
+    e.preventDefault(); // this will prevent the div from submitting
+    // const { email } =
+    await signInWithGoogle();
+    console.log(result);
+    // await fetch('/api/oauthSignup', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify({ email, displayName: name }),
+    // });
+    
+    // setUser(email);
+    onLogin();
+    // navigate('/api/user');
+  };
+
+
   return (
     <div className="container">
       <div>
@@ -60,7 +78,7 @@ const LoginSignup = ({ onLogin, setUser }) => {
       <div>
         <form className='signup-container bg-dark align-items-center'>
           <div className='signup-card col-auto'>
-            <div class="form-floating mb-3">
+            <div className="form-floating mb-3">
               
                 <input
                   type='text'
@@ -69,11 +87,11 @@ const LoginSignup = ({ onLogin, setUser }) => {
                   placeholder='Username'
                   onChange={(e) => setUsername(e.target.value)}
                 />
-                <label for="floatingInput">Username</label>
+                <label htmlFor="floatingInput">Username</label>
               
-              <div id="emailHelp" class="form-text text-light">We'll never share your information with anyone else.</div>
+              <div id="emailHelp" className="form-text text-light">We'll never share your information with anyone else.</div>
             </div>
-            <div class="form-floating mb-3">
+            <div className="form-floating mb-3">
               <input
                 type='password'
                 className='form-control'
@@ -81,20 +99,25 @@ const LoginSignup = ({ onLogin, setUser }) => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <label for="floatingInput">Password</label>
+              <label htmlFor="floatingInput">Password</label>
             </div>
             <div className="btn-group">
               <button className='btn btn-secondary text-light py-2' onClick={login}>
                 Login
               </button>
-              <div class="alert alert-dark px-0"></div>
+              <div className="alert alert-dark px-0"></div>
               <button className='btn btn-secondary text-dark py-2' onClick={signup}>
                 Sign Up
               </button>
             </div>
-            <div class="mb-3 form-check">
-              <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-              <label class="form-check-label text-light" for="exampleCheck1">I like checkboxes</label>
+            <div className='App'>
+              <button onClick={
+                  (e) => handleGoogleSignIn(e)
+                }>Google</button>
+            </div>
+            <div className="mb-3 form-check">
+              <input type="checkbox" className="form-check-input" id="exampleCheck1" />
+              <label className="form-check-label text-light" htmlFor="exampleCheck1">I like checkboxes</label>
             </div>
             {error && <p className='errmessage'>{error}</p>}
           </div>
