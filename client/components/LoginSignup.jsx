@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; // replaced useHistory with useNavigate as useHistory is deprecated
+import NavBar from './NavBar.jsx';
 
 const LoginSignup = ({ onLogin, setUser }) => {
   const [username, setUsername] = useState('');
@@ -47,38 +48,46 @@ const LoginSignup = ({ onLogin, setUser }) => {
   };
 
   return (
-    <form className='signup-container bg-dark'>
-      <div className='signup-card'>
-        <div>
-          <input
-            type='text'
-            className='form-control'
-            value={username}
-            placeholder='Username'
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </div>
-        <div>
-          <input
-            type='password'
-            className='form-control'
-            placeholder='Password'
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <div className="btn-group">
-          <button className='btn btn-secondary text-light py-2' onClick={login}>
-            Login
-          </button>
-          <div class="alert alert-dark px-0"></div>
-          <button className='btn btn-secondary text-dark py-2' onClick={signup}>
-            Sign Up
-          </button>
-        </div>
-        {error && <p className='errmessage'>{error}</p>}
+    <div className="container">
+      <div>
+      <NavBar />
       </div>
-    </form>
+
+      <div>
+        <form className='signup-container bg-dark'>
+          <div className='signup-card'>
+            <div>
+              <input
+                type='text'
+                className='form-control'
+                value={username}
+                placeholder='Username'
+                onChange={(e) => setUsername(e.target.value)}
+              />
+            </div>
+            <div>
+              <input
+                type='password'
+                className='form-control'
+                placeholder='Password'
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            <div className="btn-group">
+              <button className='btn btn-secondary text-light py-2' onClick={login}>
+                Login
+              </button>
+              <div class="alert alert-dark px-0"></div>
+              <button className='btn btn-secondary text-dark py-2' onClick={signup}>
+                Sign Up
+              </button>
+            </div>
+            {error && <p className='errmessage'>{error}</p>}
+          </div>
+        </form>
+      </div>
+    </div>
   );
 };
 

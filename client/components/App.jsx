@@ -9,6 +9,7 @@ import LoginSignup from './LoginSignup.jsx';
 import UserPage from './UserPage.jsx';
 import SearchPage from './SearchPage.jsx'; // import the SearchPage
 
+
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState('');

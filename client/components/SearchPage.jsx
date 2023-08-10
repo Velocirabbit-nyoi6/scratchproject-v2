@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactSelect from 'react-select';
 import ResultRow from './ResultRow.jsx'
+import NavBar from './NavBar.jsx';
 
 const SearchPage = (props) => {
     const [categories, setCategories] = useState([]);
@@ -90,7 +91,8 @@ const SearchPage = (props) => {
     ]
 
     return (
-        <div className="container bg-dark">
+        <div className="container">
+            <NavBar />
             <div className='searchContainer bg-dark'>
                 <h1>Guide</h1>
                 <div className='filterBar'>

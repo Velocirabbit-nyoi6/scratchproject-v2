@@ -3,6 +3,8 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; // import useNavigate
 import SavedRow from './SavedRow.jsx'
 import TriedRow from './TriedRow.jsx'
+import NavBar from './NavBar.jsx';
+
 
 
 const UserPage = ({ username }) => {
@@ -56,6 +58,7 @@ const UserPage = ({ username }) => {
  
   return (
     <div className="container">
+      <NavBar />
       <div className="bg-dark">
         {/* add a button to navigate to the search page */}
         <div className='lists'>
@@ -82,9 +85,9 @@ const UserPage = ({ username }) => {
             </tbody>
           </table>
         </div>
-        <div className='searchButton'>
+        {/* <div className='searchButton'>
           <button className='btn btn-light' onClick={() => navigate('/search')}>Go to Search Page</button>
-        </div>
+        </div> */}
       </div>
     </div>
   );
