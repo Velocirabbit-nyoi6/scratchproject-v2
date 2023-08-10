@@ -1,10 +1,7 @@
-import React from 'react';
 import Modal from './Modal.js'
-import { useState } from 'react';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import Modal from './Modal.js'
 const ResultRow = (props) => {
     const [savedPlace, setSavedPlace] = useState('');
 
