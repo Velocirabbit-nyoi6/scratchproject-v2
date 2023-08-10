@@ -1,5 +1,12 @@
 const db = require('../../models/placesModel')
 const axios = require('axios')
+const OpenAI = require("openai-api")
+// const configuration = new Configuration({
+//     organization: "org-T1ohjGvniteRFZ7FjEO9c7YN",
+//     apiKey: process.env.OPENAIKEY,
+// });
+const openai = new OpenAI(process.env.OPENAIKEY);
+
 require('dotenv').config()
 
 const placesController = {};
@@ -119,4 +126,25 @@ placesController.getGoogleInfo = async (req , res, next) =>{
             next("disaster in google images thing")
         }
     }
+
+
+    placesController.getOpenAIDescription = async (req,res,next) =>{
+
+        const gptResponse = await openai.complete({
+            engine: 'davinci',
+            prompt: 'Use the summaries provided to summarize the vibe of the place. The first review: ' + res.locals.googlePlaceDetails.reviews[0] + " \n the second review : " + res.locals.googlePlaceDetails.reviews[1],
+            maxTokens: 200,
+            temperature: 0.9,
+            topP: 1,
+            presencePenalty: 0,
+            frequencyPenalty: 0,
+            bestOf: 1,
+            n: 1,
+            stream: false
+                  });
+                  console.log(res.locals.googlePlaceDetails.reviews[0] + " checking the review string")
+                  console.log(gptResponse.data);
+                  res.locals.openAIText = gptResponse.data.text
+                  next()
+  }
 module.exports = placesController;
