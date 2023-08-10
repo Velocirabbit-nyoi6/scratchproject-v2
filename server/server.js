@@ -1,7 +1,9 @@
 const express = require('express');
 const path = require('path');
+// const cors = require('cors');
 
 const app = express();
+// app.use(cors());
 const port = 3000;
 
 const apiRouter = require('./routes/apiRouter');

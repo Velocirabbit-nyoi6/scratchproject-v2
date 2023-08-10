@@ -13,6 +13,7 @@ const LoginSignup = ({ onLogin, setUser }) => {
 
   const login = async (event) => {
     event.preventDefault();
+
     if (!username || !password) {
       setError('All fields required');
       return;
@@ -54,7 +55,7 @@ const LoginSignup = ({ onLogin, setUser }) => {
     e.preventDefault(); // this will prevent the div from submitting
     // const { email } =
     await signInWithGoogle();
-    console.log(result);
+    console.log('after signInWithGoogle');
     // await fetch('/api/oauthSignup', {
     //   method: 'POST',
     //   headers: {
@@ -65,7 +66,7 @@ const LoginSignup = ({ onLogin, setUser }) => {
     
     // setUser(email);
     onLogin();
-    // navigate('/api/user');
+    navigate('/api/user');
   };
 
 
