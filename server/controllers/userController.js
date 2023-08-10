@@ -114,7 +114,6 @@ const UserController = {
       console.log('reqbody: ', req.body)
       const storedPlaceID = await db.query(`SELECT place_id FROM places where place_name = '${placeName}'`)
 
-      // console.log('storedPlaceID.rows[0].place_id: ', storedPlaceID.rows[0].place_id)
       const user = await User.findOne({ username: username });
     
       if (!user) {
@@ -125,19 +124,7 @@ const UserController = {
         username: `${username}`},
         {$addToSet: {"savedList": `${storedPlaceID.rows[0].place_id}`}}
         );
-
-      console.log('update: ', update)
-      //get beenList from user, is array of objects that ha
-      // const { beenList } = user;
-      // const namedList = [];
-
-      // for await (let place of beenList) {
-      //   const storedPlace = await db.query(`SELECT place_name FROM places where place_id = ${place.locationID}`)
-      //   const name = storedPlace.rows[0].place_name
-      //   const { score, tags } = place;
-      //   namedList.push({name: name, score: score, tags: tags})
-      // }
-      // res.locals.beenList = namedList;
+        res.locals.savedPlace = update
       return next();
 
     } catch (error) {

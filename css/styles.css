@@ -74,17 +74,12 @@ tr {
   display: flex;
   justify-content: center;
   align-items: center;
+  justify-items: center;
   padding: 1em;
 }
 
 .button {
-  width: 50%;
-  padding: 1em;
-  margin-bottom: 1em;
-  border: none;
-  border-radius: 0.5em;
-  color: white;
+
   cursor: pointer;
-  background-color: #0d6efd;
   transition: background-color 0.3s;
 }
