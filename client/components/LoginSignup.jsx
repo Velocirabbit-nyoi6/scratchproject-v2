@@ -54,7 +54,7 @@ const LoginSignup = ({ onLogin, setUser }) => {
       </div>
 
       <div>
-        <form className='signup-container bg-dark align-items-center'>
+        <form className='signup-container bg-dark bg-gradient align-items-center'>
           <div className='signup-card col-auto'>
             <div class="form-floating mb-3">
               
