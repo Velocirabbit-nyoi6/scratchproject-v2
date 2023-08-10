@@ -11,6 +11,7 @@ const UserPage = ({ username }) => {
   const navigate = useNavigate(); // Use the useNavigate hook
   const [savedList, setSavedList] = useState([]);
   const [triedList, setTriedList] = useState([]);
+  const [deleteSaved, setDeleteSaved] = useState('');
   const getSaved = async () => {
     try {
       //query userRouters/saved with username in body
@@ -37,15 +38,34 @@ const UserPage = ({ username }) => {
       console.error(err);
     }
   };
+  useEffect(() => {
+    deleteSavedItem();
+    setTimeout(() => getSaved(), 750);
+  }, [deleteSaved])
+  const deleteSavedItem = async () => {
+    try {
+      //query userRouter/tried with username in body
+      const response = await axios.post('/api/deletedSavedPlace', { username, deleteSaved });
+      //server should return an array of objects
+      if (response.status === 200) {
+        //check if it's in response.data!
+        console.log('Saved Item Deleted!')
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
   
   useEffect(() => {
     getSaved();
     getTrys();
   }, []);
+
+  // useEffect(()=>{getSaved()}, [deleteSaved])
   //generate rows for saved list
   const savedRows = savedList.map((savedPlace) => {
     return (
-      <SavedRow name={savedPlace}/>
+      <SavedRow name={savedPlace} deleteFunc={setDeleteSaved}/>
     );
   });
   // //generate rows for tried list

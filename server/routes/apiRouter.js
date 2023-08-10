@@ -43,7 +43,9 @@ router.get('/placeinfo' , placesController.getGoogleInfo, placesController.getPl
 
 //populate tags for searchList
 // router.get('/searchTags')
-
+router.post('/deletedSavedPlace', userController.deleteSavedPlaced, (req, res) => {
+  res.status(200).send('Deleted Saved Place!')
+})
 
 // to add global error handler in server.js later
 

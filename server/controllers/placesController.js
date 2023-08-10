@@ -1,5 +1,6 @@
 const db = require('../../models/placesModel')
 const axios = require('axios')
+require('dotenv').config()
 
 const placesController = {};
 
@@ -39,7 +40,7 @@ placesController.getGoogleInfo = async (req , res, next) =>{
 
     var getPlaceIDConfig = {
             method: 'get',
-            url: 'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=' + req.query.name+req.query.address + '&inputtype=textquery&fields=place_id%2Cformatted_address%2Cname%2Crating%2Copening_hours%2Cgeometry&key=' + "AIzaSyCI7cjiE2dyrdhXsaesUcdY-DONsuVXvD0",
+            url: 'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=' + req.query.name+req.query.address + '&inputtype=textquery&fields=place_id%2Cformatted_address%2Cname%2Crating%2Copening_hours%2Cgeometry&key=' + process.env.PLACESAPIKEY,
             headers: {
             "Access-Control-Allow-Origin" : "*" ,
             "Access-Control-Allow-Methods": "POST",
@@ -49,6 +50,7 @@ placesController.getGoogleInfo = async (req , res, next) =>{
       
       axios(getPlaceIDConfig)
       .then(function (response) {
+        console.log("testing the env variable " + process.env.PLACESAPIKEY)
         res.locals.placeId = response.data.candidates[0].place_id
         console.log("successfully set the place id into res. Place_id is: " + res.locals.placeId)
         next()
@@ -59,7 +61,7 @@ placesController.getGoogleInfo = async (req , res, next) =>{
       });
     // var getPhotosConfig = {
     //     method: 'get',
-    //     url: `https://maps.googleapis.com/maps/api/place/details/json?place_id=ChIJN1t_tDeuEmsRUsoyG83frY4&fields=name%2Crating%2Cformatted_phone_number&key="AIzaSyCI7cjiE2dyrdhXsaesUcdY-DONsuVXvD0"`,
+    //     url: `https://maps.googleapis.com/maps/api/place/details/json?place_id=ChIJN1t_tDeuEmsRUsoyG83frY4&fields=name%2Crating%2Cformatted_phone_number&key=`,
     //     headers: {"Access-Control-Allow-Origin" : "*" }
     //   };
       
@@ -76,7 +78,7 @@ placesController.getGoogleInfo = async (req , res, next) =>{
         console.log("reached get placed details")
         var config = {
             method: 'get',
-            url: `https://maps.googleapis.com/maps/api/place/details/json?place_id=${res.locals.placeId}&key=AIzaSyCI7cjiE2dyrdhXsaesUcdY-DONsuVXvD0`,
+            url: `https://maps.googleapis.com/maps/api/place/details/json?place_id=${res.locals.placeId}&key=${process.env.PLACESAPIKEY}`,
             headers: { }
           };
 

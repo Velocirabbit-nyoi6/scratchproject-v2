@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
+
+
 const PlaceDetails = (props) => {
     const [photosArr, setPhotosArr] = useState([]);
 
@@ -39,7 +41,7 @@ const PlaceDetails = (props) => {
                 photosArr.slice(0,3).map((el, index) => (
                     <img
                         key={index}
-                        src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&maxHeight=600&photo_reference=${el}&key=AIzaSyCI7cjiE2dyrdhXsaesUcdY-DONsuVXvD0`}
+                        src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&maxHeight=600&photo_reference=${el}&key=${process.env.PLACESAPIKEY}`}
                         alt={`Photo ${index}`}
                         width = {400}
                         height = {290}
