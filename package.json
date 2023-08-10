@@ -12,12 +12,21 @@
     "axios": "^1.4.0",
     "bcryptjs": "^2.4.3",
     "bootstrap": "^5.3.1",
+    "crypto": "^1.0.1",
+    "crypto-browserify": "^3.12.0",
     "dotenv": "^16.3.1",
+<<<<<<< HEAD
     "firebase": "^10.1.0",
+=======
+    "modal": "^1.2.0",
+>>>>>>> dev
     "mongodb": "^5.7.0",
     "mongoose": "^7.4.2",
     "node": "^20.5.0",
+    "os": "^0.1.2",
+    "path": "^0.12.7",
     "pg": "^8.11.2",
+    "process": "^0.11.10",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.14.2",

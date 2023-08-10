@@ -2,6 +2,7 @@ const path = require('path');
 const htmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+
   devServer: {
     // hot: true,
     historyApiFallback: true,
@@ -16,7 +17,6 @@ module.exports = {
       '/api': 'http://localhost:3000',
     },
   },
-
   entry: path.join(__dirname, 'index.js'),
   devtool: 'eval-source-map', // added to resolve the dev tool error in chrome console
 
